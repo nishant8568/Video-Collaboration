@@ -7,16 +7,27 @@
   <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.8/jquery.min.js"></script>
   <script type="text/javascript" src="http://cdn.peerjs.com/0.3/peer.js"></script>
   <script type="text/javascript" src="/javascripts/chatScript.js"></script>
+  <script type="text/javascript" src="/javascripts/overlay.js"></script>
 </head>
 
 <body>
 <div class="pure-g">
-  <!-- Video area -->
-  <div class="pure-u-2-3" id="video-container">
-    <video id="their-video" autoplay></video>
-    <video id="my-video" muted="true" autoplay></video>
+  <div id="canvasContainer">
+    <canvas id='outputCanvas'></canvas>
   </div>
 
+  <div id="their-video-container">
+    <video autoplay id="their-video"></video>
+  </div>
+
+  <div id="my-video-container">
+    <video id='my-video' autoplay muted height="375 px" width="500 px"></video>
+  </div>
+
+  <div class="btn-container">
+    <button class="btn" id="give_help" onclick="giveHelp()">Give Help</button>
+    <button class="btn" id="receive_help">Receive Help</button>
+  </div>
   <!-- Steps -->
   <div class="pure-u-1-3">
     <h2>PeerJS Video Chat</h2>
@@ -40,19 +51,16 @@
 
       <h3>Make a call</h3>
 
-      <video id="handVideo" src="/videos/hand.mp4" height="100px" width="100px" muted="true" autoplay></video>
-
       <div class="pure-form">
         <input type="text" placeholder="Call user id..." id="callto-id">
-        <a href="#" class="pure-button pure-button-success" id="make-call">Call</a>
+        <button class="btn" id="make-call">Call</button>
       </div>
     </div>
 
     <!-- Call in progress -->
     <div id="step3">
       <p>Currently in call with <span id="their-id">...</span></p>
-
-      <p><a href="#" class="pure-button pure-button-error" id="end-call">End call</a></p>
+      <button class="btn" id="end-call">End call</button>
     </div>
   </div>
 </div>
