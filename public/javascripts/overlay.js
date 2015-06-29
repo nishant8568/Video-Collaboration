@@ -4,15 +4,19 @@
 isHelping = false;
 
 function giveHelp() {
+    $('.my-video-container').toggleClass('my-video-container-helping');
+    $('.their-video-container').toggleClass('their-video-container-helping');
+    $('.canvasContainer').toggleClass('canvasContainer-helping');
     if (!isHelping) {
-        document.getElementById("give_help").innerHTML = "Stop Help";
+        document.getElementById("give_help").innerHTML = "End Help";
         isHelping = true;
+        draw();
     }
     else {
         document.getElementById("give_help").innerHTML = "Give Help";
         isHelping = false;
+        console.log('ishelping .................. ' + isHelping)
     }
-    draw();
 }
 
 
@@ -25,11 +29,17 @@ function draw() {
     // Chrome implementation
     else if (window.webkitRequestAnimationFrame) window.webkitRequestAnimationFrame(draw);
     // Other browsers that do not yet support feature
-    else setTimeout(draw, 16.7);
+    else if (isHelping) {
+        console.log('draw() called ...');
+        setTimeout(draw, 16.7);
+    }
+    else
+        console.log('Help ended...');
     DrawVideoOnCanvas();
 }
 
 function DrawVideoOnCanvas() {
+    console.log('DrawVideoOnCanvas() called ...')
     var object = document.getElementById("my-video")
     var backgroundObject;
     backgroundObject = document.getElementById("their-video");

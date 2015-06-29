@@ -4,33 +4,36 @@
   <meta charset="UTF-8">
   <title><%= title%></title>
   <link rel="stylesheet" href="/stylesheets/chatStyle.css">
-  <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.8/jquery.min.js"></script>
+  <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+  <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
   <script type="text/javascript" src="http://cdn.peerjs.com/0.3/peer.js"></script>
   <script type="text/javascript" src="/javascripts/chatScript.js"></script>
   <script type="text/javascript" src="/javascripts/overlay.js"></script>
 </head>
 
 <body>
-<div class="pure-g">
-  <div id="canvasContainer">
+<div class="container-fluid">
+  <div class="canvasContainer">
     <canvas id='outputCanvas'></canvas>
   </div>
 
-  <div id="their-video-container">
+  <div class="their-video-container">
     <video autoplay id="their-video"></video>
   </div>
 
-  <div id="my-video-container">
+  <div class="my-video-container">
     <video id='my-video' autoplay muted height="375 px" width="500 px"></video>
   </div>
 
   <div class="btn-container">
-    <button class="btn" id="give_help" onclick="giveHelp()">Give Help</button>
-    <button class="btn" id="receive_help">Receive Help</button>
+    <button class="btn btn-primary" id="give_help" onclick="giveHelp()">Give Help</button>
+    <button class="btn btn-primary" id="request_help">Request Help</button>
   </div>
+
   <!-- Steps -->
   <div class="pure-u-1-3">
-    <h2>PeerJS Video Chat</h2>
+    <h2>Video Collaboration</h2>
 
     <!-- Get local audio/video stream -->
     <div id="step1">
@@ -53,7 +56,7 @@
 
       <div class="pure-form">
         <input type="text" placeholder="Call user id..." id="callto-id">
-        <button class="btn" id="make-call">Call</button>
+        <button class="btn btn-primary" id="make-call">Call</button>
       </div>
     </div>
 
