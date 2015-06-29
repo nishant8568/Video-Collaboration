@@ -42,7 +42,6 @@ function requestHelp() {
     }
 }
 
-
 function draw() {
     console.log('draw() called ......');
     if (isGivingHelp || isTakingHelp)
@@ -97,18 +96,24 @@ function DrawVideoOnCanvas(baseVideo, overlayVideo) {
             var b = imgDataNormal.data[i + 2];
             var a = imgDataNormal.data[i + 3];
 
+            /*
             hsl = rgb2hsv(r, g, b)
             if (hsl[0]>80)
                 a = 0;
+            */
+
+            // Convert to grayscale.  An explanation of the ratios
+            // can be found here: http://en.wikipedia.org/wiki/Grayscale
+            var grayScale = (r * 0.3) + (g * 0.59) + (b * .11);
+            if(grayScale > 130)
+                a = 0;
             /*
-             // compare rgb levels for green and set alphachannel to 0;
-             selectedR = 105; //document.getElementById('redRangevalue').value;
-             selectedG = 105; //document.getElementById('greenRangevalue').value;
-             selectedB = 105; //document.getElementById('blueRangevalue').value;
-             if (r >= selectedR && g >= selectedG && b >= selectedB) {
-             a = 0;
-             }
-             */
+            imgData.data[i + 0] = grayScale;
+            imgData.data[i + 1] = grayScale;
+            imgData.data[i + 2] = grayScale;
+            imgData.data[i + 3] = a;
+            */
+
             if (a != 0) {
                 imgData.data[i + 0] = r;
                 imgData.data[i + 1] = g;
