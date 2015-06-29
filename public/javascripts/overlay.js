@@ -1,48 +1,75 @@
 /**
  * Created by Nishant on 6/28/2015.
  */
-isHelping = false;
+isGivingHelp = false;
+isTakingHelp = false;
 
 function giveHelp() {
     $('.my-video-container').toggleClass('my-video-container-helping');
     $('.their-video-container').toggleClass('their-video-container-helping');
     $('.canvasContainer').toggleClass('canvasContainer-helping');
-    if (!isHelping) {
+    if (!isGivingHelp) {
         document.getElementById("give_help").innerHTML = "End Help";
-        isHelping = true;
-        draw();
+        isGivingHelp = true;
+        setTimeout(draw, 3000);
     }
     else {
         document.getElementById("give_help").innerHTML = "Give Help";
-        isHelping = false;
-        console.log('ishelping .................. ' + isHelping)
+        isGivingHelp = false;
+        console.log('isGivingHelp .................. ' + isGivingHelp)
+    }
+}
+
+function requestHelp() {
+    $('.my-video-container').toggleClass('my-video-container-helping');
+    $('.their-video-container').toggleClass('their-video-container-helping');
+    $('.canvasContainer').toggleClass('canvasContainer-helping');
+    if (!isTakingHelp) {
+        document.getElementById("request_help").innerHTML = "Done";
+        isTakingHelp = true;
+        setTimeout(draw, 3000);
+    }
+    else {
+        document.getElementById("request_help").innerHTML = "Request Help";
+        isTakingHelp = false;
+        console.log('isTakingHelp .................. ' + isTakingHelp)
     }
 }
 
 
 function draw() {
-    if (window.requestAnimationFrame) window.requestAnimationFrame(draw);
-    // IE implementation
-    else if (window.msRequestAnimationFrame) window.msRequestAnimationFrame(draw);
-    // Firefox implementation
-    else if (window.mozRequestAnimationFrame) window.mozRequestAnimationFrame(draw);
-    // Chrome implementation
-    else if (window.webkitRequestAnimationFrame) window.webkitRequestAnimationFrame(draw);
-    // Other browsers that do not yet support feature
-    else if (isHelping) {
-        console.log('draw() called ...');
-        setTimeout(draw, 16.7);
+    console.log('draw() called ......');
+    if (isGivingHelp || isTakingHelp)
+    {
+        if (window.requestAnimationFrame) window.requestAnimationFrame(draw);
+        // IE implementation
+        else if (window.msRequestAnimationFrame) window.msRequestAnimationFrame(draw);
+        // Firefox implementation
+        else if (window.mozRequestAnimationFrame) window.mozRequestAnimationFrame(draw);
+        // Chrome implementation
+        else if (window.webkitRequestAnimationFrame) window.webkitRequestAnimationFrame(draw);
+        // Other browsers that do not yet support feature
+        else setTimeout(draw, 16.7);
+        if (isGivingHelp)
+        {
+            var baseVideo = "their-video";
+            var overlayVideo = "my-video";
+            DrawVideoOnCanvas(baseVideo, overlayVideo);
+        }
+        else if (isTakingHelp)
+        {
+            var baseVideo = "my-video";
+            var overlayVideo = "their-video";
+            DrawVideoOnCanvas(baseVideo, overlayVideo);
+        }
     }
-    else
-        console.log('Help ended...');
-    DrawVideoOnCanvas();
 }
 
-function DrawVideoOnCanvas() {
+function DrawVideoOnCanvas(baseVideo, overlayVideo) {
     console.log('DrawVideoOnCanvas() called ...')
-    var object = document.getElementById("my-video")
+    var object = document.getElementById(overlayVideo)
     var backgroundObject;
-    backgroundObject = document.getElementById("their-video");
+    backgroundObject = document.getElementById(baseVideo);
     var width = object.width;
     var height = object.height;
     var canvas = document.getElementById("outputCanvas");
