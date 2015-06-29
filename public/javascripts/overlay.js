@@ -10,11 +10,14 @@ function giveHelp() {
     $('.canvasContainer').toggleClass('canvasContainer-helping');
     if (!isGivingHelp) {
         document.getElementById("give_help").innerHTML = "End Help";
+        document.getElementById("request_help").disabled = true;
         isGivingHelp = true;
-        setTimeout(draw, 3000);
+        //setTimeout(draw, 3000);
+        draw();
     }
     else {
         document.getElementById("give_help").innerHTML = "Give Help";
+        document.getElementById("request_help").disabled = false;
         isGivingHelp = false;
         console.log('isGivingHelp .................. ' + isGivingHelp)
     }
@@ -26,11 +29,14 @@ function requestHelp() {
     $('.canvasContainer').toggleClass('canvasContainer-helping');
     if (!isTakingHelp) {
         document.getElementById("request_help").innerHTML = "Done";
+        document.getElementById("give_help").disabled = true;
         isTakingHelp = true;
-        setTimeout(draw, 3000);
+        //setTimeout(draw, 3000);
+        draw();
     }
     else {
         document.getElementById("request_help").innerHTML = "Request Help";
+        document.getElementById("give_help").disabled = false;
         isTakingHelp = false;
         console.log('isTakingHelp .................. ' + isTakingHelp)
     }
