@@ -76,6 +76,12 @@
     to { opacity:1; }
 }
 
+#outputCanvas {
+    position: relative;
+    width: 100%;
+    height: 100%;
+}
+
 #step1-error,
 #step2,
 #step3 {
